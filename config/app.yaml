@@ -1,0 +1,13 @@
+#Application Http Port
+port: 1234
+
+#Application debug mode
+debug: true
+
+#Application Logging
+log: true
+
+log_dir: ""
+
+#Application timezone
+timezone: "Asia/Colombo"

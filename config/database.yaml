@@ -1,0 +1,10 @@
+read:
+  host: "127.0.0.1"
+  port: "3306"
+  database: "personal_db"
+  user: "root"
+  password: "Punsith12"
+  max_idle_connections: 50
+  max_open_connections: 100
+
+timezone: "Local"
