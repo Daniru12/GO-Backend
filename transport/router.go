@@ -49,26 +49,33 @@ func Handlers() *mux.Router {
 		opts...,
 	)).Methods(http.MethodGet)
 
-	r.Handle(`/personal/profile`, httpTransport.NewServer(
+	r.Handle(`/personal/studentprofiles`, httpTransport.NewServer(
 		endpoints.GetAllPersonalProfilesEndpoint(personalProfileService),
 		httpRequest.DecodeRequestPersonalProfileAll,
 		httpResponse.EncodeResponsePersonalProfile,
 		opts...,
 	)).Methods(http.MethodGet)
 
-	r.Handle(`/personal/profile`, httpTransport.NewServer(
+	r.Handle(`/personal/createprofile`, httpTransport.NewServer(
 		endpoints.CreatePersonalProfileEndpoint(personalProfileService),
-		httpRequest.DecodeRequestPersonalProfilePost, 
+		httpRequest.DecodeRequestPersonalProfilePost,
 		httpResponse.EncodeResponsePersonalProfile,
 		opts...,
 	)).Methods(http.MethodPost)
 
-	r.Handle(`/personal/profile/{personal_id}`, httpTransport.NewServer(
-	endpoints.UpdatePersonalProfileEndpoint(personalProfileService),
-	httpRequest.DecodeRequestPersonalProfilePatch,
-	httpResponse.EncodeResponsePersonalProfile,
-	opts...,
-)).Methods(http.MethodPatch)
+	r.Handle(`/personal/updateprofile/{personal_id}`, httpTransport.NewServer(
+		endpoints.UpdatePersonalProfileEndpoint(personalProfileService),
+		httpRequest.DecodeRequestPersonalProfilePatch,
+		httpResponse.EncodeResponsePersonalProfile,
+		opts...,
+	)).Methods(http.MethodPatch)
+
+	r.Handle(`/personal/deleteprofile/{personal_id}`, httpTransport.NewServer(
+		endpoints.DeletePersonalProfileEndpoint(personalProfileService),
+		httpRequest.DecodeRequestPersonalProfileDelete, 
+		httpResponse.EncodeResponsePersonalProfile,
+		opts...,
+	)).Methods(http.MethodPatch)
 
 	//Metrics handler
 	r.Handle(`/metrics`, promhttp.Handler())

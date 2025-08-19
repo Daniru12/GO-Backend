@@ -36,7 +36,7 @@ func GetAllPersonalProfilesEndpoint(svc services.PersonalProfileService) endpoin
 		}
 
 		return PersonalProfileRequestResponse{
-			Request:  domain.PersonalProfile{}, // empty request
+			Request:  domain.PersonalProfile{}, 
 			Response: responseStatus,
 		}, nil
 	}
@@ -59,11 +59,37 @@ func CreatePersonalProfileEndpoint(svc services.PersonalProfileService) endpoint
 
 func UpdatePersonalProfileEndpoint(svc services.PersonalProfileService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		req, _ := request.(domain.PersonalProfile)
+
+		req := request.(domain.PersonalProfile)
+		
+
 		res, err := svc.UpdatePersonalProfile(ctx, req)
+		if err != nil {
+			return nil, err
+		}
+
 		return PersonalProfileRequestResponse{
 			Request:  req,
 			Response: res,
-		}, err
+		}, nil
 	}
 }
+
+func DeletePersonalProfileEndpoint(svc services.PersonalProfileService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(domain.PersonalProfile)
+
+		res, err := svc.DeletePersonalProfile(ctx, req)
+		if err != nil {
+			return nil, err
+		}
+		
+		
+		return PersonalProfileRequestResponse{
+			Request:  req,
+			Response: res,
+		}, nil
+	}
+}
+
+

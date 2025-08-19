@@ -2,7 +2,7 @@ package domain
 
 import (
 	"context"
-	"time"
+	"project1/util"
 )
 
 type PersonalProfileRequest struct {
@@ -15,11 +15,11 @@ type CreatePersonalProfileRequest struct {
 
 type PersonalProfile struct {
 	Id          int64     `json:"id"`
-	Name        string    `json:"name"`
-	Description string    `json:"description"`
-	Status      bool      `json:"status"`
-	CreateTime  time.Time `json:"create_time"`
-	UpdateTime  time.Time `json:"update_time"`
+	Name        *string    `json:"name"`
+	Description *string    `json:"description"`
+	Status      *string    `json:"status"`
+	CreateTime  utils.CustomTime `json:"create_time"`
+	UpdateTime  utils.CustomTime `json:"update_time"`
 }
 
 // Repository
